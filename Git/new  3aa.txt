@@ -1,0 +1,15 @@
+ <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+ <%@ page language="java" contentType="text/html; charset=Windows-1256" pageEncoding="Windows-1256"%>
+ <portlet:defineObjects />
+     <script type="text/javascript">
+         function send()
+         {
+             document.UploadForm.submit();
+         }
+    </script>
+        <h3>Upload portlet:</h3>
+       
+        <form name="UploadForm" action="<portlet:actionURL/>" enctype="multipart/form-data" method="POST">
+          <input type="file" name="fileName" size="50"><br>
+          <input type="Submit" value="Upload File" onClick="send()">
+        </form>

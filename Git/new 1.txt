@@ -1,0 +1,44 @@
+<!-- Product Type -->
+		
+        <record id="ed_product_type_form_view" model="ir.ui.view">
+            <field name="name">ed.product.type.form.view</field>
+            <field name="model">ed.product.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Product Types">
+                    <group colspan="4" col="2">
+                    <field name="name"/>
+                    </group>
+                    <separator colspan="4" string="Notes"/>
+                    <group colspan="4" col="4">
+                        <field name="description" nolabel="1"/>
+                        <field name="producttype_id" invisible="1" />
+                        <field name="ed_product_type" invisible="1" />
+                        <field name="profile_type_ids" invisible="1" />
+                        <field name="finish_type_ids" invisible="1" />
+                        <field name="pricefactor_producttype_ids" invisible="1" /> 
+                    </group>
+                </form>
+            </field>
+        </record>
+        
+        <record id="ed_product_type_tree" model="ir.ui.view">
+            <field name="name">ed.product.type.tree</field>
+            <field name="model">ed.product.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Product Types">
+                    <field name="name" select="1"/>
+                    <field name="description" select="1"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="ed_product_type_form_action" model="ir.actions.act_window">
+            <field name="name">Product Types</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">ed.product.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help">Create and manage the product types you want to maintain in your system.</field>
+        </record>

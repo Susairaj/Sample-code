@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="studentdepartment_tree_view">
+			<field name="name">studentmark.tree</field>
+			<field name="model">studentmark</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="student">
+					<field name="student_id" />
+					<field name="Percentage" string="Percentage(%)"/>
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="studentdepartment_form_view">
+			<field name="name">studentmark.form</field>
+			<field name="model">studentmark</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="student" version="7.0">
+					<sheet>
+						<group>
+							<group>
+								<field name="student_id" />
+								<field name="tamil" />
+								<field name="english" />
+								<field name="fuzzy" />
+								
+							</group>
+							<group>
+								<field name="accountancy" />
+								<field name="intgral_calculas" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record model="ir.ui.view" id="studentmark_graph_view">
+			<field name="name">studentmark.graph</field>
+			<field name="model">studentmark</field>
+			<field name="type">graph</field>
+			<field name="arch" type="xml">
+				<field name="student_id" />
+				<field name="Percentage" />
+			</field>
+		</record>
+		
+		
+		<record model="ir.actions.act_window" id="action_studentmark_form">
+			<field name="name">Student</field>
+			<field name="res_model">studentmark</field>
+			<field name="view_mode">tree,form,graph</field>
+		</record>
+
+		<menuitem name="StudentMarks" parent="student_sub_menu" id="studentmark_menu_mainform" 
+		action="action_studentmark_form" sequence="2" />
+
+	</data>
+</openerp>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="student_tree_view">
+			<field name="name">student.tree</field>
+			<field name="model">student</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="student">
+					<field name="name" />
+					<field name="gender" />
+					<field name="year" />
+					<field name="dob" />
+					<field name="mobileno" />
+					<field name="address" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="student_form_view">
+			<field name="name">student.form</field>
+			<field name="model">student</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="student" version="7.0">
+					<sheet>
+						<group>
+							<group>
+								<field name="name" />
+								<field name="gender" widget="radio"/>
+								<field name="mobileno" />
+								<field name="year" />
+								<field name="studentdepartment_id" />
+							</group>
+							<group>
+								<field name="dob" />
+							</group>
+							<notebook>
+								<page string="Address">
+									<field name="address" />
+								</page>
+							</notebook>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		
+		<record model="ir.actions.act_window" id="action_student_form">
+			<field name="name">Student</field>
+			<field name="res_model">student</field>
+		</record>
+
+		<menuitem name="Student" icon="terp-project" id="student_base_menu" />
+		<menuitem name="Student Report" parent="student_base_menu" id="student_sub_menu" />
+		<menuitem name="Student Details" parent="student_sub_menu" id="student_menu_mainform" action="action_student_form" sequence="1" />
+		
+	</data>
+</openerp>

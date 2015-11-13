@@ -1,0 +1,49 @@
+[('responsibility_ids','in','uid')]
+<field name="domain">[('name','=','Buyer')]</field>
+
+
+def write(self, cr, uid, ids, vals, context=None):
+        executive_update_access = False
+        old_state = self.browse(cr, uid, ids).state
+        new_state = vals.get('state',None)
+        if old_state in ['approval'] and new_state == 'decline':
+                raise osv.except_osv(_('Validate Error'), _('Once Approved you can not Decline'))
+        if new_state:
+            if new_state in 'submitive' and old_state in 'approval':
+                raise osv.except_osv(_('Validate Error'), _('You can not move back from approved'))
+        if new_state in 'submitive' and old_state in 'decline':
+                raise osv.except_osv(_('Validate Error'), _('You can not move back from Declined'))    
+        date_start = self.browse(cr, uid, ids).date_start
+        date_end = self.browse(cr, uid, ids).date_end
+        team_lead_id = self.browse(cr, uid, ids).team_lead_id
+        res = super(initiative_proposal, self).write(cr, uid,ids, vals, context=None)
+        if old_state not in ['approval'] and new_state == 'approval':
+            group_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'project', 'group_project_manager')
+            if group_id:
+                val=self.pool.get('res.users').read(cr, uid, [uid], ['groups_id'], context=context)[0]['groups_id']
+                if group_id[1] in val:
+                    executive_update_access = True
+            if executive_update_access == False:
+                raise osv.except_osv(_('Validate Error'), _('You are not an executive so you can not approve initiative proposal'))
+            if not team_lead_id:
+                raise osv.except_osv(_('Validate Error'), _('Team lead is not available'))
+            if (not date_start) or (not date_end):
+                raise osv.except_osv(_('Validate Error'), _('Start/End Date is not Available'))
+            if date_start > date_end:
+                raise osv.except_osv(_('Validate Error'), _('Start Date is Greater than End Date'))    
+            for stu in self.pool.get('initiative.proposal').browse(cr, uid, ids, context=None):
+                vals['name']=str(stu.name)
+                vals['team_lead_id']=stu.team_lead_id.id
+                vals['date_start']=stu.date_start
+                vals['date_end']=stu.date_end
+                vals['caution_day']=stu.caution_day
+                vals['department_id']=stu.department_id.id
+                vals['initiative_type_id']=stu.initiative_type_id.id
+                vals['initiative_category_id']=stu.initiative_category_id.id
+                vals.pop('state')
+                record=[]
+                for objectives in stu.objective_ids:
+                    record.append([6,False,[objectives.id]])
+                vals['objective_ids']=record    
+                self.pool.get('project.project').create(cr, uid, vals, context=None)
+        return res

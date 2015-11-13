@@ -1,0 +1,6 @@
+attrs="{'invisible':[('is_user_group','=',True),('is_system_admin_group','=',False),('is_lead_active_user','=',False),('is_executive_group','=',False)]}"
+
+<field name="is_lead_active_user" invisible="1"/>
+		                    <field name="is_executive_group" invisible="1"/>
+		                    <field name="is_system_admin_group" invisible="1"/>
+		                    <field name="is_user_group" invisible="1"/>

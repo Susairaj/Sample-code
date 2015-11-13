@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<record model="ir.ui.view" id="studentmark_tree_view">
+			<field name="name">studentdepartment.tree</field>
+			<field name="model">studentdepartment</field>
+			<field name="type">tree</field>
+			<field name="arch" type="xml">
+				<tree string="student">					
+					<field name="department" />
+				</tree>
+			</field>
+		</record>
+
+		<record model="ir.ui.view" id="studentmark_form_view">
+			<field name="name">studentdepartment.form</field>
+			<field name="model">studentdepartment</field>
+			<field name="type">form</field>
+			<field name="arch" type="xml">
+				<form string="student" version="7.0">
+					<sheet>
+						<group>
+							<group>								
+								<field name="department" />
+							</group>
+						</group>
+					</sheet>
+				</form>
+			</field>
+		</record>
+		<record model="ir.actions.act_window" id="action_studentdepartment_form">
+			<field name="name">Student</field>
+			<field name="res_model">studentdepartment</field>
+		</record>
+
+		<menuitem name="StudentDepartment" parent="student_sub_menu" id="studentdepartment_menu_mainform" 
+		action="action_studentdepartment_form" sequence="3" />
+
+	</data>
+</openerp>

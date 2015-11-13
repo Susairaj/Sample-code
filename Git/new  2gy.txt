@@ -1,0 +1,37 @@
+tuple: (<openerp.sql_db.Cursor object at 0x086E27B0>, 1, [1], [(6, 0, [1, 1])], [(6, 0, 
+ [1])])
+ 
+ tuple: (<openerp.sql_db.Cursor object at 0x086E27B0>, 1, [1], [(6, 0, [1, 1])], [(6, 0, 
+ [1])])
+ 
+ dict: {'value': {'members': [1, 1]}}
+
+ def onchange_team_support(self, cr, uid, ids, team_support_ids,team_lead_id, members, context=None):
+        val = {}
+        existing_members=[]
+        team_members=[]
+        if members[0][2]:
+            existing_members=members[0][2]
+            val = {
+                    'members': existing_members
+                    }
+        if team_support_ids[0][2]:
+            team_members=team_support_ids[0][2]
+            if members[0][2]:
+                if team_members<existing_members:
+                    team_members.append(team_lead_id)
+                    val={
+                         'members':team_members
+                         }
+                elif team_members!=existing_members:
+                    for i in existing_members:
+                        team_members.append(i)
+                        val = {
+                             'members': team_members
+                          }
+                else:
+                    raise osv.except_osv(_('Alert'), _('Team lead already exist in Team member list.'))
+                    val={
+                     'members': existing_members
+                     }   
+        return {'value': val}

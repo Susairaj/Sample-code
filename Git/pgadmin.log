@@ -1,0 +1,236 @@
+2015-01-09 15:13:18 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-01-09 15:13:43 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-01-09 15:14:05 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-01-09 15:14:28 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-01-14 15:19:10 ERROR  : ERROR:  syntax error at or near "table"
+LINE 1: delete from table
+                    ^
+2015-01-14 15:19:20 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:21 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:21 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:22 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:22 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:22 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:22 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:23 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:23 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:23 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:23 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:24 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:24 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-14 15:20:25 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (2, 1, 2015-01-14 04:03:46.023, null, 1, bba, 2015-01-14 04:03:46.023).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-01-19 10:31:06 ERROR  : ERROR:  syntax error at or near "form"
+LINE 1: delete form student
+               ^
+2015-01-19 16:03:23 ERROR  : ERROR:  cannot drop table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:03:30 ERROR  : ERROR:  cannot drop table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:05:06 ERROR  : ERROR:  cannot drop table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:05:19 ERROR  : ERROR:  cannot drop table test1 column id because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1 column id
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:06:21 ERROR  : ERROR:  cannot drop table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:06:51 ERROR  : ERROR:  cannot drop constraint test1_pkey on table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on index test1_pkey
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:07:12 ERROR  : ERROR:  cannot drop constraint test1_pkey on table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on index test1_pkey
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:08:23 ERROR  : ERROR:  cannot drop constraint test1_pkey on table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on index test1_pkey
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:09:31 ERROR  : ERROR:  cannot drop constraint test1_pkey on table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on index test1_pkey
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:09:39 ERROR  : ERROR:  cannot drop table test1 column id because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1 column id
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:10:03 ERROR  : ERROR:  cannot drop table test1 column id because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1 column id
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:19:36 ERROR  : ERROR:  cannot drop table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on table test1
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-19 16:20:15 ERROR  : ERROR:  cannot drop constraint test1_pkey on table test1 because other objects depend on it
+DETAIL:  constraint res_users_test1_rel_test1_id_fkey on table res_users_test1_rel depends on index test1_pkey
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+2015-01-27 12:37:00 ERROR  : insufficient data in "T" message
+2015-01-29 16:38:42 ERROR  : ERROR:  database "odoo2" is being accessed by other users
+DETAIL:  There are 5 other sessions using the database.
+2015-01-29 16:39:19 ERROR  : ERROR:  database "odoo2" is being accessed by other users
+DETAIL:  There are 5 other sessions using the database.
+2015-02-03 11:06:27 ERROR  : ERROR:  null value in column "student_id" violates not-null constraint
+DETAIL:  Failing row contains (1, 1, 2015-01-29 11:21:11.698, null, 1, bba, 2015-01-29 11:21:11.698).
+CONTEXT:  SQL statement "UPDATE ONLY "public"."studentmark" SET "student_id" = NULL WHERE $1 OPERATOR(pg_catalog.=) "student_id""
+2015-02-03 14:10:56 ERROR  : ERROR:  database "odoo" is being accessed by other users
+DETAIL:  There are 5 other sessions using the database.
+2015-02-03 14:11:22 ERROR  : ERROR:  database "odoo2" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+2015-03-06 15:21:31 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:21:54 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:21:56 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:21:58 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:21:58 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:21:59 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:18 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:18 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:19 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:19 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:19 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:19 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:20 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:20 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:20 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:20 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:56 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:57 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:57 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:57 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:57 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:57 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:58 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:58 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:58 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:58 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:59 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:59 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-06 15:22:59 ERROR  : ERROR:  cannot drop the currently open database
+2015-03-13 14:17:05 ERROR  : ERROR:  syntax error at or near "form"
+LINE 1: delete form mail_message
+               ^
+2015-03-13 14:31:11 ERROR  : ERROR:  database "wbm1" is being accessed by other users
+DETAIL:  There are 4 other sessions using the database.
+2015-03-13 14:43:47 ERROR  : ERROR:  database "wbm" is being accessed by other users
+DETAIL:  There are 3 other sessions using the database.
+2015-03-23 16:06:02 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-03-23 16:06:20 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-03-23 16:06:26 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-03-23 16:07:27 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-03-23 16:07:39 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-03-23 16:07:44 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "postgres"
+
+2015-03-31 15:20:36 ERROR  : ERROR:  role "liferay" cannot be dropped because some objects depend on it
+DETAIL:  owner of database liferay
+2015-04-10 16:17:52 ERROR  : ERROR:  role "odoo" cannot be dropped because some objects depend on it
+DETAIL:  owner of database WBM
+owner of database Wbm
+owner of database odoo1
+869 objects in database odoo1
+765 objects in database WBM
+205 objects in database liferay
+763 objects in database Wbm
+2015-04-10 17:23:15 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "odoo"
+
+2015-04-10 17:24:42 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "odoo"
+
+2015-04-10 17:26:36 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "odoo"
+
+2015-04-10 17:26:47 ERROR  : Error connecting to the server: FATAL:  password authentication failed for user "odoo"
+
+2015-05-15 17:01:50 ERROR  : 
+2015-05-16 14:30:01 ERROR  : ERROR:  database "liferay" is being accessed by other users
+DETAIL:  There are 20 other sessions using the database.
+2015-05-19 14:52:53 ERROR  : ERROR:  database "OdooNew" is being accessed by other users
+DETAIL:  There are 5 other sessions using the database.
+2015-05-19 15:04:21 ERROR  : ERROR:  database "OdooNew" is being accessed by other users
+DETAIL:  There are 5 other sessions using the database.
+2015-06-05 10:31:50 ERROR  : ERROR:  database "WBM" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+2015-06-17 15:35:29 ERROR  : ERROR:  column "name" does not exist
+LINE 1: select id, name from res_users
+                   ^
+2015-06-17 15:35:34 ERROR  : ERROR:  column "name" does not exist
+LINE 1: select id,name from res_users
+                  ^
+2015-06-17 15:35:35 ERROR  : ERROR:  column "name" does not exist
+LINE 1: select id,name from res_users
+                  ^
+2015-06-17 15:35:36 ERROR  : ERROR:  column "name" does not exist
+LINE 1: select id,name from res_users
+                  ^
+2015-06-17 15:35:36 ERROR  : ERROR:  column "name" does not exist
+LINE 1: select id,name from res_users
+                  ^
+2015-07-01 10:26:25 ERROR  : ERROR:  database "WBM" is being accessed by other users
+DETAIL:  There are 6 other sessions using the database.
+2015-07-13 16:23:35 ERROR  : ERROR:  role "lportal" does not exist
+2015-08-10 14:26:10 ERROR  : ERROR:  invalid input syntax for integer: "2015-08-26 10:18:16.26"
+LINE 1: INSERT INTO public.todo_task(taskid) VALUES ('2015-08-26 10:...
+                                                     ^
+2015-08-10 14:26:26 ERROR  : ERROR:  invalid input syntax for integer: "2015-08-26 10:18:16.26"
+LINE 1: INSERT INTO public.todo_task(taskid) VALUES ('2015-08-26 10:...
+                                                     ^
+2015-08-10 14:27:04 ERROR  : ERROR:  invalid input syntax for integer: "2015-08-26 10:18:16.26"
+LINE 1: INSERT INTO public.todo_task(taskid) VALUES ('2015-08-26 10:...
+                                                     ^
+2015-08-10 15:51:43 ERROR  : ERROR:  null value in column "taskid" violates not-null constraint
+DETAIL:  Failing row contains (null, null, null, null, null, null).
+2015-08-10 15:51:47 ERROR  : ERROR:  null value in column "taskid" violates not-null constraint
+DETAIL:  Failing row contains (null, null, null, null, null, null).
+2015-08-10 15:51:51 ERROR  : ERROR:  null value in column "taskid" violates not-null constraint
+DETAIL:  Failing row contains (null, null, null, null, null, null).
+2015-08-10 15:51:54 ERROR  : ERROR:  null value in column "taskid" violates not-null constraint
+DETAIL:  Failing row contains (null, null, null, null, null, null).
+2015-08-10 15:52:08 ERROR  : ERROR:  null value in column "taskid" violates not-null constraint
+DETAIL:  Failing row contains (null, null, null, null, null, null).
+2015-08-10 17:53:16 ERROR  : ERROR:  database "WBM" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+2015-08-10 18:11:37 ERROR  : ERROR:  database "WBM" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+2015-09-02 18:06:21 ERROR  : ERROR:  syntax error at end of input
+LINE 1: create table "action"
+                             ^
+2015-09-02 18:09:56 ERROR  : ERROR:  syntax error at or near "'name'"
+LINE 1: insert into action ('name')values('thest');
+                            ^
+2015-09-09 11:40:07 ERROR  : ERROR:  syntax error at or near "FROM"
+LINE 3:   FROM project_task;
+          ^
+2015-09-11 10:38:37 ERROR  : ERROR:  database "freshernew" is being accessed by other users
+DETAIL:  There are 2 other sessions using the database.
+2015-09-21 14:03:35 ERROR  : ERROR:  database "manufacture_element2" is being accessed by other users
+DETAIL:  There are 6 other sessions using the database.

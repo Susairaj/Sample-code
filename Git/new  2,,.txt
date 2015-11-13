@@ -1,0 +1,80 @@
+def download_zip(self, cr, uid, ids, context=None):
+#        if context.get('active_model', False):
+#            active_id = context.get('active_id', False)
+#            model = context.get('active_model')
+#            filename = self.pool.get(model).browse(cr, uid, active_id).name
+#            # Create zip file
+#            z = zipfile.ZipFile(filename, 'w')
+#            any_file = False
+#            for line in self.browse(cr, uid, ids):
+##            for line in self.pool.get('ir.attachment'):   
+#                for doc in line.document_ids:
+#                    if doc.is_attachment:
+#                        name = doc.datas_fname
+#                        datas=str(doc.datas)
+#                        c=base64.decodestring(datas)
+#                        z.writestr(name, c)
+#                        any_file = True
+#            # flush and close
+#            z.close()
+#            
+#            if any_file:
+#                f = file(filename, "r")
+    def download_zip(self, cr, uid, ids, context=None):
+        if context.get('active_model', False):
+            active_id = context.get('active_id', False)
+            model = context.get('active_model')
+            filename = self.pool.get(model).browse(cr, uid, active_id).name
+            # Create zip file
+            z = zipfile.ZipFile(filename, 'w')
+            any_file = False
+            for line in self.browse(cr, uid, ids):
+#            for line in self.pool.get('ir.attachment'):   
+                for doc in line.document_ids:
+                    if doc.is_attachment:
+                        name = doc.datas_fname
+                        datas=str(doc.datas)
+                        c=base64.decodestring(datas)
+                        z.writestr(name ,doc.datas)
+                        any_file = True
+                        f = file(filename, "r")
+                        datas = base64.encodestring(f.read())
+                        f.close()
+                        attachment_data = {
+                    'name': name + '.zip',
+                    'datas_fname': name + '.zip',
+                    'datas':datas,
+                    'res_model': model,
+                    'file_type': 'application/zip',
+                    'res_id': active_id,
+                }
+                document = self.pool.get('ir.attachment').create(cr, uid, attachment_data, context=context)
+                return document
+            return False
+            # flush and close
+            z.close()
+            
+            
+#                datas = base64.encodestring(f.read())
+#                m1=datas.encode('base64','strict')
+#                m2=datas.decode('base64','strict')
+#                e=datas.decode("ascii", "ignore")
+#                t=base64.standard_b64decode(datas)
+#                v=datas.decode(encoding='UTF-8',errors='strict')
+#                n=datas.encode('utf-8', "ignore")
+#                k=base64.b64encode('Hello');
+#                i=base64.b64decode(datas);
+##                test=unicode(datas,"ascii")
+##                base64.decodestring(datas)
+#                f.close()
+#                attachment_data = {
+#                    'name': filename + '.zip',
+#                    'datas_fname': filename + '.zip',
+#                    'datas':datas,
+#                    'res_model': model,
+#                    'file_type': 'application/zip',
+#                    'res_id': active_id,
+#                }
+#                document = self.pool.get('ir.attachment').create(cr, uid, attachment_data, context=context)
+#                return document
+#        return False

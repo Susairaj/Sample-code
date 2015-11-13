@@ -1,0 +1,5 @@
+Remove css for document mangement
+Rename goto to sites and update style for that
+list default drives
+update home page
+look up menus

@@ -1,0 +1,6 @@
+{} -dictionary
+[] -List
+() -Tuple 
+_action=private
+__action=public
+get the dictionary value==rec.get('field name')

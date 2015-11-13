@@ -1,0 +1,13 @@
+calendarbookingid
+
+
+SELECT *
+FROM (
+SELECT * FROM lportal.calendarbooking t1
+UNION ALL
+SELECT * FROM 
+odoo.calendar_event t2
+) tbl
+GROUP BY calendarbookingid
+HAVING count(*) = 1
+ORDER BY calendarbookingid

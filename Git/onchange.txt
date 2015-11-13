@@ -1,0 +1,9 @@
+def onchange_student_name(self, cr, uid, ids, stu_id, context=None):
+        val = {}
+        if stu_id:
+            mark_id = self.pool.get('student.course').browse(cr, uid, stu_id)
+            val = {
+                   'percentage': mark_id.percentage,
+                   'grade':mark_id.grade,
+                   }
+        return {'value': val}

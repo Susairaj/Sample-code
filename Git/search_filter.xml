@@ -1,0 +1,30 @@
+
+<record id="adjustment_applied_search_view" model="ir.ui.view">
+			<field name="name">adjustment.applied.search</field>
+			<field name="model">adjustment.applied</field>
+			<field name="arch" type="xml">
+				<search string="Adjustment Applied To">
+					<filter name="name" string="Name" />
+					<group expand="0" string="Group By...">
+						<filter name="group_by_name" string="Name" domain="[]"
+							context="{'group_by':'name'}" />
+					</group>
+				</search>
+			</field>
+		</record>
+		
+
+		<record id="action_adjustment_applied" model="ir.actions.act_window">
+			<field name="name">Adjustment Applied To</field>
+			<field name="res_model">adjustment.applied</field>
+			<field name="view_mode">tree</field>
+			<field name="search_view_id" ref="adjustment_applied_search_view" />
+			<field name="domain">[('name','=','Buyer')]</field>
+			<field name="context">{"search_default_name":True,}
+			</field>
+			<field name="help" type="html">
+				<p class="oe_view_nocontent_create">
+					Create a new Adjustment Applied To
+				</p>
+			</field>
+		</record>

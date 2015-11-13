@@ -1,0 +1,90 @@
+public class UploadPortlet extends GenericPortlet{
+ 
+     protected String viewJSP;
+     protected String process;
+     protected Vector<?> v=null;
+     protected String realPath=null;
+ 
+     public void init() throws PortletException {
+
+        viewJSP = getInitParameter("view-jsp");
+    }
+
+    public void processAction(ActionRequest request, ActionResponse response) throws PortletException, IOException
+    { 
+
+        realPath = getPortletContext().getRealPath("/");
+        System.out.println(realPath);
+
+        byte[] bytes = null;
+        PortletContext portletContext = request.getPortletSession().getPortletContext();
+        try{
+
+            UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
+            String sourceFileName =uploadRequest.getFileName("fileName");
+            File file = uploadRequest.getFile("fileName");
+            try {
+                bytes = FileUtil.getBytes(file);
+            } catch (IOException e2) {            
+                e2.printStackTrace();
+            }
+            File newFile=null;
+
+            if ((bytes != null) && (bytes.length > 0)) {
+
+                try {
+
+                    System.out.println(sourceFileName);
+
+                    newFile = new File(realPath+"html/uploads/"+sourceFileName);
+                    FileInputStream fileInputStream = new FileInputStream(file);
+                    FileOutputStream fileOutputStream = new FileOutputStream(newFile);            
+                    fileInputStream.read(bytes);       
+                   
+                    String value = new String(bytes);
+                    System.out.println(value);
+                   
+                    fileOutputStream.write(bytes, 0, bytes.length);                   
+                    fileOutputStream.close();
+                    fileInputStream.close();
+                }
+                catch (FileNotFoundException e) {
+                    System.out.println("File Not Found.");               
+                    e.printStackTrace();
+                }
+                catch (IOException e1){
+                    System.out.println("Error Reading The File.");
+                    e1.printStackTrace();
+                }
+            }
+
+        } catch (Exception e) {
+            System.out.println("Exception::::"+e.getMessage());
+        }
+    }
+    public void render(RenderRequest request, RenderResponse response) throws PortletException, IOException
+    {
+
+        doView(request,response);
+    }
+
+    public void doView(RenderRequest request, RenderResponse response)throws IOException
+    {
+        String path=viewJSP;
+        PortletRequestDispatcher portletRequestDispatcher = getPortletContext().getRequestDispatcher(path);
+        if (portletRequestDispatcher == null) {
+            _log.error(viewJSP + " is not a valid include");
+        }
+        else{
+
+            try{
+                portletRequestDispatcher.include(request, response);
+            }
+            catch(Exception e){               
+                _log.error("Error Occured:"+e);
+            }
+        }
+    }
+    private static Log _log = LogFactoryUtil.getLog(UploadPortlet2.class);
+
+}

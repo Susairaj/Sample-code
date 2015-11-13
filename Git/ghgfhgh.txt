@@ -1,0 +1,95 @@
+def _is_user_group(self, cr, uid, ids, fieldname, args, context=None):
+        res = {}
+        is_user_group = False
+        group_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'project', 'group_project_user')
+        for record in self.browse(cr, uid, ids, context):
+            for activity in record.activity_ids:
+                if uid == activity.assigned_to.id:
+                    if group_id:
+                        val = self.pool.get('res.users').read(cr, uid, [uid], ['groups_id'], context=context)[0]['groups_id']
+                        if group_id[1] in val:
+                            is_user_group = True
+        res[record.id] = is_user_group
+        return res
+
+
+    def _is_project_admin_group(self, cr, uid, ids, fieldname, args, context=None):
+        is_executive_group = False
+        res = {}
+        for id in ids:
+            group_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'project', 'group_project_manager')
+            if group_id:
+                val = self.pool.get('res.users').read(cr, uid, [uid], ['groups_id'], context=context)[0]['groups_id']
+                if group_id[1] in val:
+                    is_executive_group = True
+        res[id] = is_executive_group
+        return res
+
+    def _is_project_admins_group(self, cr, uid, context=None):
+        is_executive_group = 0
+        group_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'project', 'group_project_manager')
+        if group_id:
+            val = self.pool.get('res.users').read(cr, uid, [uid], ['groups_id'], context=context)[0]['groups_id']
+            if group_id[1] in val:
+                is_executive_group = 1
+        return bool(is_executive_group == 1)
+
+    def _is_system_admin_group(self, cr, uid, ids, fieldname, args, context=None):
+        is_executive_group = False
+        res = {}
+        for id in ids:
+            group_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'project', 'group_project_admin')
+            if group_id:
+                val = self.pool.get('res.users').read(cr, uid, [uid], ['groups_id'], context=context)[0]['groups_id']
+                if group_id[1] in val:
+                    is_executive_group = True
+        res[id] = is_executive_group
+        return res
+
+    def _is_system_admins_group(self, cr, uid, context=None):
+        is_executive_group = 0
+        group_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'project', 'group_project_admin')
+        if group_id:
+            val = self.pool.get('res.users').read(cr, uid, [uid], ['groups_id'], context=context)[0]['groups_id']
+            if group_id[1] in val:
+                is_executive_group = 1
+        return bool(is_executive_group == 1)
+
+
+    def _is_lead_active_user(self, cr, uid, ids, fieldname, args, context=None):
+        is_lead_support_group = False
+        res = {}
+        for id in ids:
+            project_obj = self.browse(cr, uid, ids, context)
+            if project_obj.team_lead_id.id == uid:
+                is_lead_support_group = True
+            if project_obj.team_support_ids:
+                for team_support_id in project_obj.team_support_ids:
+                    if team_support_id.id == uid:
+                        is_lead_support_group = True
+        res[id] = is_lead_support_group
+        return res   
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		'is_user_group': fields.function(_is_user_group, type="boolean", string="Is User Group?"),
+        'is_executive_group': fields.boolean(string="Is Admin Group?"),
+        'is_executive_group': fields.function(_is_project_admin_group, type="boolean", string="Is Admin Group?"),
+        'is_system_admin_group': fields.boolean(string="Is System Admin Group?"),
+        'is_system_admin_group': fields.function(_is_system_admin_group, type="boolean",string="Is System Admin Group?"),
+        'is_lead_active_user': fields.boolean(string="Team Lead or support"),
+        'is_lead_active_user': fields.function(_is_lead_active_user, type="boolean", string='Team Lead or support'),
+        'activity_ids': fields.one2many('project.task', 'project_id', 'Activities'),
+        'team_lead_id': fields.many2one('res.users', string='Team Lead'),
+        'team_support_ids': fields.many2many('res.users', 'project_team_support_rel', 'project_id', 'uid',
+                                             'Team Support'),

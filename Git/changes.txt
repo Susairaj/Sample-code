@@ -1,0 +1,324 @@
+class project_plan(osv.osv):
+    _name = 'project.plan'
+    
+    
+    def onchange_activity_template(self, cr, uid, ids, template_id, context=None):
+        context = context or {}
+        state_ids = []
+        if not template_id:
+            state_ids = self.pool.get('activity.template.state').search(cr, uid, [('template_id', '=', False)])
+            if state_ids:
+                return {'value': {'activity_temp_state_id': state_ids[0], 'per_completion': self.pool.get('activity.template.state').browse(cr, uid, state_ids[0]).percentage_of_completion}}
+            return {'value': {'activity_temp_state_id': False}}
+        template = self.pool.get('activity.template').browse(cr, uid, template_id)
+        if template.state_ids.ids[0]:
+            activity_temp_state_id = template.state_ids.ids[0]
+#             per_completion = template.state_ids[0].percentage_of_completion
+            activity_temp_obj = self.pool.get('activity.template.state').browse(cr, uid, activity_temp_state_id)
+            per_completion = activity_temp_obj.percentage_of_completion
+            return {'value': {'activity_temp_state_id': activity_temp_state_id, 'per_completion': per_completion}}
+        else:
+            return True
+        
+    def create_initiative(self, cr, uid, ids, context=None):
+        update_ids = []
+        obj = self.browse(cr, uid, ids)[0]
+        print obj.activities_ids.name
+        print obj.members
+        objective_ids = []; members_ids = []; benefit_ids = []
+        objective_ids = [(6, 0, [x.id for x in obj.objective_ids])]
+        members_ids = [(6, 0, [x.id for x in obj.members])]
+#        for member in obj.members:
+#            member_ids.append((0,0,{'name':member.name, 'login': member.login}))
+        for activity in obj.activities_ids:
+            update_ids.append((0,0,{'name':activity.name,'activity_temp_id':activity.activity_temp_id.id,
+                                     'per_completion':activity.per_completion, 'assigned_to':activity.assigned_to.id,
+                                     'date_start':activity.date_start, 'date_end':activity.date_end}))
+        self.pool.get('project.project').create(cr, uid, {'name':obj.name, 'team_lead_id': obj.team_lead_id.id,
+                                   'initiative_category_id': obj.initiative_category_id.id, 'initiative_type_id':obj.initiative_type_id.id,
+                                   'department_id': obj.department_id.id, 'date_start': obj.date_start,
+                                   'date_end': obj.date_end,'caution_day': obj.caution_day,
+                                    'state':'open','activity_ids':update_ids,'members':members_ids,'state':'not_started',
+                                  })
+        return 
+    
+    def create(self, cr, uid, vals, context=None):
+        activity_start_date = ''; activity_end_date = '';
+        project_name = vals.get('name')
+        date_start = vals.get('date_start')
+        date_end = vals.get('date_end')
+        if date_start > date_end:
+            raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date.Project name is %s')%(project_name))
+        activity_ids = vals.get('activities_ids')
+        if activity_ids:
+            for activity in activity_ids:
+                activity_name = activity[2]['name']
+                activity_start_date = activity[2]['date_start']
+                activity_end_date = activity[2]['date_end']
+                if activity_ids:
+                    if date_start > activity_start_date:
+                        raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date.Activity name is %s')%(activity_name))
+                    if date_end < activity_end_date:
+                        raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date.Activity name is %s')%(activity_name))
+        return super(project_plan, self).create(cr, uid, vals, context=None)
+    
+    def write(self, cr, uid, ids, vals, context=None):
+        activity_start_date = ''; activity_end_date = '';start_date = ''; end_date = ''; activity_ids = None; start_date_activity = '';
+        end_date_activity = '';
+        project_name = vals.get('name')
+        for record in self.browse(cr, uid, ids):
+            date_start = vals.get('date_start')
+            date_end = vals.get('date_end')
+            if date_start and date_end:
+                    if project_name:
+                        if activity_ids == None:
+                            for activity in record.activities_ids:
+                                activity_start_date= activity.date_start
+                                activity_end_date= activity.date_end
+                                if date_start < activity_start_date and date_end < activity_end_date:
+                                    raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(project_name))
+                        if date_start > date_end:
+                            raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(project_name))
+                    else:
+                        if  activity_ids == None:
+                            for activity in record.activities_ids:
+                                activity_start_date= activity.date_start
+                                activity_end_date= activity.date_end
+                                if date_start < activity_start_date:
+                                    raise osv.except_osv(_('Alert'), _('Project- %s, Start Date should be less than activity  Start Date End ')%(record.name))
+                                if date_end < activity_end_date:
+                                    raise osv.except_osv(_('Alert'), _('Project- %s %s, Start Date should be less than activity  Start Date End ')%(record.name))
+                        if date_start > date_end:
+                            raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(record.name))
+            if date_end==None and date_start:
+                if  activity_ids == None:
+                            for activity in record.activities_ids:
+                                activity_start_date= activity.date_start
+                                activity_end_date= activity.date_end
+                                if date_start > activity_start_date:
+                                    raise osv.except_osv(_('Alert'), _('Project- %s, Start Date should be less than activity  Start Date End ')%(record.name))
+                if date_start > record.date_end:
+                    if project_name:
+                        raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(project_name))
+                    else:
+                        raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(record.name))
+            if date_start==None and date_end:
+                if  activity_ids == None:
+                            for activity in record.activities_ids:
+                                activity_start_date= activity.date_start
+                                activity_end_date= activity.date_end
+                                if date_end < activity_end_date:
+                                    raise osv.except_osv(_('Alert'), _('Project- %s, End Date should be less than activity  End Date')%(record.name))
+                if date_end < record.date_start:
+                    if project_name:
+                        raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(project_name))
+                    else:
+                        raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the project %s')%(record.name))
+            activity_ids = vals.get('activities_ids')
+            if activity_ids:
+                for activities in activity_ids:
+                    if activities[2]:
+                        a = activities[2]
+                        if 'date_start' in a.keys():
+                            start_date_activity = a['date_start']
+                        else:
+                            end_date_activity = a['date_end']
+                        if 'name' in a.keys():
+                            name_activity = a['name']
+            for activity in record.activities_ids:
+                activity_start_date= activity.date_start
+                activity_end_date= activity.date_end
+                activity_name = activity.name
+                if activity_ids:
+                    if activity_start_date and end_date_activity:
+                        if activity_start_date > end_date_activity:
+                            if name_activity:
+                                raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the activity %s')%name_activity)
+                            else:
+                                raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the activity %s')%activity_name)
+                    if activity_end_date and start_date_activity:       
+                        if activity_end_date < start_date_activity:
+                            if name_activity:
+                                raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the activity %s')%name_activity)
+                            else:
+                                raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date for the activity %s')%activity_name)
+                    if date_end and end_date_activity:
+                        if date_end < end_date_activity:
+                            raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date.Activity name is %s'))
+                    if date_start and start_date_activity:
+                        if date_start > start_date_activity:
+                            raise osv.except_osv(_('Alert'), _('End Date should be greater than Start Date.Activity name is %s'))
+                    if date_start==None and start_date_activity:
+                        if record.date_start > start_date_activity:
+                            raise osv.except_osv(_('Alert'), _('Activity %s, Start Date should be less than the Project Start Date')%activity_name)
+                    if date_end==None and end_date_activity:
+                        if record.date_end < end_date_activity:
+                            raise osv.except_osv(_('Alert'), _('Activity %s, End Date should be less than the Project End Date')%activity_name)
+        return super(project_plan, self).write(cr, uid, ids, vals, context)
+        
+
+    _columns={
+             'name': fields.char('Name'),
+            'team_lead_id': fields.many2one('res.users', string='Team Lead'),
+            'team_support_ids': fields.many2many('res.users', 'project_team_support_rel', 'project_id', 'uid', 'Team Support'),
+            'project_template_id': fields.many2one('project.template', string='Initiative Template', required=False),
+            'category_ids': fields.many2many('project.tag', 'project_tags', 'project_id', 'category_id', string='Tags'),
+            'module_id': fields.many2one('module.module', 'Resource'),
+            'release': fields.char('Version/Release', Char=100),
+            'process_id': fields.many2one('process.process', 'Process'),
+            'department_id': fields.many2one('department.department', 'Department'),
+            'objective_ids': fields.many2many('objective.objective', 'project_objectives', 'project_id', 'objective_id',
+                                              string='Objective', store=True),
+            'initiative_category_id': fields.many2one('initiative.category', 'Initiative Type'),
+            'initiative_group_id': fields.many2one('initiative.group', string='Initiative Group'),
+            'initiative_description': fields.text(string='Initiative Description'),
+            'initiative_group_desc': fields.text(string='Initiative Group Desc'),
+            'initiative_type_id': fields.many2one('initiative.type', 'Initiative Hierarchy'),
+            'benefit_ids': fields.many2many('benefit.benefit', 'project_benefits', 'project_id', 'benefit_id',
+                                            string='Outcome', store=True),
+            'stage_id': fields.many2one('stage.stage', 'Stage'),
+            'per_completion': fields.integer('% Of Completion'),
+            'budget': fields.float('Budget'),
+            'status': fields.many2one('status.status', 'Approval Status'),
+            'date_start': fields.date('Start Date', required=True),
+            'date_end': fields.date('End Date', required=True),
+            'initiative_sequence_id': fields.many2one('initiative.sequence','Initiative Sequence'),
+            'calendar_activity_ids': fields.many2many('calendar.event', 'project_calendar_activities',
+                                                      'calendar_activity_id', 'activity_id', 'Calendar Activities'),
+            'caution_day': fields.integer('Caution', required=True),
+            'members': fields.many2many('res.users', 'project_rel', 'project_plan_id', 'member_ueser_id', 'Project Members'),
+            'activities_ids': fields.one2many('project.task', 'project_plan_id', 'Activities', ondelete='cascade'),
+    }
+    _sql_constraints = [('name_uniq', 'unique(name)', 'Project already exists..!')]     
+project_plan()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--project.plan by susai  -->
+        <record id="project_plan_tree" model="ir.ui.view">
+            <field name="name">project.plan.tree</field>
+            <field name="model">project.plan</field>
+            <field name="arch" type="xml">
+                <tree string="Project Plan">
+                            <field name="name" required="1" />
+                            <field name="team_lead_id" widget="selection" />
+                            <field name="project_template_id" widget="selection" />
+                            <field name="per_completion" />
+                            <field name="date_end" />
+                            <field name="stage_id" />
+                </tree>
+            </field>
+        </record>
+		<record id="project_plan_form" model="ir.ui.view">
+			<field name="name">project.plan.form</field>
+			<field name="model">project.plan</field>
+			<field name="arch" type="xml">
+				<form string="Project Plan">
+				    <header>
+				        <button name="create_initiative" string="Approve" type="object" icon="gtk-apply" />
+				    </header>
+					<group>
+						<div class="oe_title">
+							<label for="name" class="oe_edit_only" string="Name" />
+							<h1 style="width: 21em;">
+								<field name="name" required="1" />
+							</h1>
+						</div>
+					</group>
+					<group>
+						<group>
+							<newline />
+							<field name="team_lead_id" widget="selection" />
+							<field name="team_support_ids" widget="many2many_tags" />
+							<newline />
+							<field name="objective_ids" widget="many2many_tags"
+								placeholder="N/A" />
+							<field name="project_template_id" widget="selection" />
+							<field name="benefit_ids" widget="many2many_tags"
+								placeholder="N/A" />
+							<field name="module_id" placeholder="N/A" />
+							<field name="department_id" placeholder="N/A" />
+							<field name="initiative_category_id" widget="selection" />
+							<field name="initiative_type_id" widget="selection" />
+							<field name="initiative_group_id" widget="selection" />
+							<field name="initiative_group_desc" />
+							<newline />
+						</group>
+						<group>
+							<field name="per_completion" />
+							<field name="budget" />
+							<field name="date_start" />
+							<field name="date_end" />
+							<field name="caution_day" />
+							<field name="release" />
+							<field name="process_id" />
+							<field name="status" />
+							<field name="stage_id" />
+							<field name="initiative_group_desc" />
+						</group>
+					</group>
+					<notebook>
+						<page string="Team">
+							<field name="members" />
+						</page>
+						<page string="Activities">
+							<field name="activities_ids" context="{'members':members}">
+								<tree string="Activity">
+									<field name="name" />
+									<field name="date_start" />
+									<field name="date_end" />
+									<field name="per_completion" />
+								</tree>
+								<form>
+									<group>
+										<group>
+											<field name= "name" string="Name" />
+											<field name= "activity_temp_id" on_change="onchange_activity_temp_id(activity_temp_id)"  string="Activity Template" />
+											<field name= "assigned_to" attrs="{'required':[('assigned_to','=',True)]}"  domain="[('id', '=', members[0][2])]"  string="Assigned To"/>
+										</group>
+										<group>
+											<field name= "per_completion" string="Percentage" />
+											<field name="date_start" attrs="{'required':[('assigned_to','!=',False)]}" string="Start Date"/>
+			                                <field name="date_end" attrs="{'required':[('assigned_to','!=',False)]}" string="End Date"/>
+										</group>
+									</group>
+								</form>
+							</field>
+						</page>
+					</notebook>
+
+				</form>
+			</field>
+		</record>
+		<record id="view_project_plan" model="ir.actions.act_window">
+			<field name="name">Project Plan</field>
+			<field name="res_model">project.plan</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">tree,form</field>
+			<field name="limit">20</field>
+		</record>
+		<menuitem action="view_project_plan" name="Project Plan" id="menu_project_plan"
+			parent="project.menu_project_management" sequence="3" />
+			
+			
+			
+			
+			
+			
+			
+In project.task
+'project_plan_id': fields.many2one('project.plan', 'Projects', ondelete='set null', select=True, track_visibility='onchange', change_default=True),

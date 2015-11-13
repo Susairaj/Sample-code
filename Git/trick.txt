@@ -1,0 +1,8 @@
+Remote connection:
+     MSTSC
+change the fire fox user:
+    firefox -no-remote -P "Another Profile"
+Wbm site:
+  http://50.62.133.174:8069/web
+  
+  http://localhost:8069/web/database/selector

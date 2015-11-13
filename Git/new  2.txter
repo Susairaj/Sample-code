@@ -1,0 +1,17 @@
+def write(self, cr, uid, ids, vals, context=None):
+        super(initiative_proposal, self).write(cr, uid,ids, vals, context=None)
+        ini_proposal_obj = self.browse(cr, uid, ids)
+        if ini_proposal_obj.state == 'approval':
+            proposal_vals={
+                          'name'                 :ini_proposal_obj['name'],
+                          'team_lead_id'          :ini_proposal_obj['team_lead_id'],
+                          'objective_ids'         :ini_proposal_obj['objective_ids'],
+                          'date_start'            :ini_proposal_obj['date_start'],
+                          'date_end'              :ini_proposal_obj['date_end'],
+                          'category_ids'          :ini_proposal_obj['category_ids'],
+                          'initiative_category_id':ini_proposal_obj['initiative_category_id'],
+                          'initiative_type_id'    :ini_proposal_obj['initiative_type_id'],
+                          'caution_day'           :ini_proposal_obj['caution_day'],
+                           }
+            self.pool.get('project.project').create(cr, uid, vals, context=None)
+            return super(project_project, self).write(cr, uid,ids, proposal_vals, context=None)

@@ -1,0 +1,21 @@
+def _get_course_fee(self, cr, uid, ids, course_fee, arg, context=None):
+#        res = dict.fromkeys(ids, False)
+#        course_fee = False
+#        for rec in self.browse(cr, uid, ids):
+#            if (rec.year_of_student == 'first_year'):
+#                course_fee = "6000"
+##            elif (rec.percentage >= 60) and (rec.percentage < 90):
+##                grade = "a"
+##            elif (rec.percentage >= 40) and (rec.percentage < 60):
+##                grade = "b"
+##            elif (rec.percentage < 40):
+##                grade = "c"
+#            res[rec.id] = course_fee
+#        return res
+#    
+    
+#    def onchange_dob(self, cr, uid, ids, dob, context=None):
+#        val = {}
+#        if dob:
+#            val = { 'age' : datetime.date.today().year - datetime.datetime.strptime(dob, '%Y-%m-%d').date().year }
+#        return {'value': val}

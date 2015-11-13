@@ -1,0 +1,15 @@
+10/01/2015
+creating new student module with one2many ,many2one ,many2many fields
+12/01/2015
+Creating new test module using search and group by and tried float,binary,widget,menus,status bar
+13/01/2015
+Learned browse,create,write,on change method,
+Conducting test Using fields(function , many2many ,binary)
+14/01/2015
+Calculating age from date of birth Using fields function,on change
+Tried to inherit one module to another
+19/01/2015
+worked menu items and also create a new module (Hospital) and inserting the needed fields and worked on that
+Inherit one module to another module used text field and also one2many field
+20/01/2015
+creating hospital module using classes patient,student and doctor and also Learned hiding and shown the 
