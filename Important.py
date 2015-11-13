@@ -18,7 +18,6 @@ python version
 	
 	PYTHON:
 	
-	
 	http://runnable.com
 	http://win32com.goermezer.de/
 	http://www.programiz.com/python-programming
@@ -105,6 +104,21 @@ python version
 Email:tflyingbridge@wbmoore.com
 Password :Web4portalZ
 
+
+
+class replacement_code(models.Model):
+    _name = 'replacement.code'
+    name = fields.Many2one('replacement.reasoncode','Replacement Code')
+    whos_fault = fields.Many2one('replacement.faults','Whos Fault')
+    amount = fields.Float('Amount')
+    total_amount = fields.Float('Total Amount',compute='find_total')
+    sale_order_id = fields.Many2one('sale.order')
+    
+    @api.depends('amount')
+    def find_total(self):
+        for record in self:
+            record.total_amount = (float(record.sale_order_id.amount_untaxed) * float(record.amount))/100
+        return True
 
 Liferay Image With content:
 <table border="0" cellpadding="1" cellspacing="1" height="250" style="color: rgb(0, 0, 0); font-family: effra, sans-serif; font-size: 16px; line-height: normal;" width="550">
