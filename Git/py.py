@@ -14,3 +14,23 @@ To separate keys and values::
 	stu_id={a:3,b:4}
 	keys = stu_id.keys()
 	values = stu_id.values()
+	
+Upload many2many field::
+
+def load_acces_rights(self, cr, uid, ids, context=None):
+
+        access = [];list_menu_ids=[]; values = {}
+        parent_menu_id = self.pool.get('ir.ui.menu').search(cr,uid,[('name', '=', 'KnowSpace'),('parent_id', '=', None)],context=context)
+        menu_obj = self.pool.get('ir.ui.menu').browse(cr, uid, parent_menu_id)
+        if menu_obj:
+            list_menu_ids.append(menu_obj.id)
+            menu_ids = self.pool.get('ir.ui.menu').search(cr,uid,[('parent_id', '=', menu_obj.id)],context=context)
+            for menu_id in menu_ids:
+                list_menu_ids.append(menu_id)
+                sub_menu_ids = self.pool.get('ir.ui.menu').search(cr,uid,[('parent_id', '=', menu_id)],context=context)
+                sub_menu_obj =  self.pool.get('ir.ui.menu').browse(cr, uid, sub_menu_ids)
+                if sub_menu_obj:
+                    for sub_menu_id in sub_menu_obj:
+                        print sub_menu_id.sequence
+                        list_menu_ids.append((4,sub_menu_id.id))
+        values.update({'menu_access': [(6, 0, list_menu_ids)]})
