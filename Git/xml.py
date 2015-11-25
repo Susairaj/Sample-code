@@ -21,3 +21,6 @@ Filter today,this week, this month::
  ('create_date','&lt;=', ((context_today()+datetime.timedelta(days=6)).strftime('%%Y-%%m-%%d')))]"/>
 <filter string="This Month" domain="[('create_date','&lt;=',(context_today()+relativedelta(day=31)).strftime('%%Y-%%m-%%d')),
 ('create_date','&gt;=',(context_today()-relativedelta(day=1)).strftime('%%Y-%%m-%%d'))]"/>
+
+How to use options::one2many field
+<field name="partner_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
