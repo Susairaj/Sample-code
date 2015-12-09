@@ -24,3 +24,8 @@ Filter today,this week, this month::
 
 How to use options::one2many field
 <field name="partner_id" options="{'limit': 10, 'create': false, 'create_edit': false}"/>
+
+Change the line color using xpath::
+<xpath expr="//tree[@string='Attachments']" position="attributes">
+					<attribute name="colors">orange:state=='request_review';green:type == 'binary'; blue:type =='url'</attribute>
+				</xpath>
