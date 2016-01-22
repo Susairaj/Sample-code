@@ -299,4 +299,41 @@ thread_pool.message_post(
         type="notification",
         subtype="mt_comment",
         context=context,
-        **post_vars)			
+        **post_vars)		
+
+
+Apply domain filter for the many2one field:::
+
+@api.onchange('place')
+def onchange_place(self):
+    res = {}
+    if self.place:
+        res['domain'] = {'asset_catg_id': [('place_id', '=', self.place.id)]}
+    return res
+Load One2many fields value using default_get::
+
+@api.model
+    def default_get(self, fields_name):
+        receiving_type = [];
+        data = super(MaterialReceiving, self).default_get(fields_name)
+        for record in self.env['receiving.attachment.type'].search([]):
+            if record.id != self.env['receiving.attachment'].search([('id', '=', record.id )]).id:
+                receiving_type.append((0, 0,{'receiving_attach_type_id': record.id}))
+            else:
+                receiving_type.append((0, 0,{'receiving_attach_type_id': record.id}))
+            data['receiving_attachment_ids'] = receiving_type
+        return data
+    
+    @api.model
+    def default_get(self, fields_name):
+        res = super(MaterialReceiving, self).default_get(fields_name)
+        attachment_types = self.env['receiving.attachment.type'].search([])
+        receiving_attachment = self.env['receiving.attachment']
+        data = []
+        for attachment_type in attachment_types:
+            attachment = receiving_attachment.create({
+                'receiving_attach_type_id': attachment_type.id,
+            })
+            data.append(attachment.id)
+        res['receiving_attachment_ids'] = [(6, False, data)]
+        return res	
