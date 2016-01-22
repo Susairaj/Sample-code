@@ -1,0 +1,11 @@
+http://interactivepython.org/runestone/default/user/login?_next=/runestone/default/index
+https://inventwithpython.com/hacking/chapter15.html
+http://ludwiktrammer.github.io/odoo/odoo-count-badge-menu-notification.html
+http://pythoncentral.io/
+http://stackoverflow.com/questions/70577/best-online-resource-to-learn-python
+http://www.fullstackpython.com/best-python-resources.html
+https://www.techinasia.com/python-learning-free
+http://www.swaroopch.com/notes/python/
+http://pymbook.readthedocs.org/en/latest/
+http://smarterer.com/tests/python
+https://pythonadventures.wordpress.com/
