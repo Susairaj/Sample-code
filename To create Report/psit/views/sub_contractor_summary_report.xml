@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+		<report string="Transaction Summay" 
+			id="psit.transaction_summary_report_view"
+			model="sub.contractor.report" 
+			report_type="qweb-pdf" 
+			name="psit.sub_contractor_summary_report_qweb"
+			file="psit.sub_contractor_summary_report_qweb" />
+			
+	</data>
+</openerp>
