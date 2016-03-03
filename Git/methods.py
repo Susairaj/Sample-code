@@ -337,3 +337,12 @@ Load One2many fields value using default_get::
             data.append(attachment.id)
         res['receiving_attachment_ids'] = [(6, False, data)]
         return res	
+Trim the whitespace end of the string::
+ a= "ac tion "
+ s = a.rstrip()
+ print s
+ ac tion
+
+ Trim the whitespace starting of the string::
+ 
+ m = a.lstrip()
